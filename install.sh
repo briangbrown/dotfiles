@@ -9,14 +9,24 @@ cp .claude/settings.json ~/.claude/settings.json
 mkdir -p ~/.config
 cp starship.toml ~/.config/starship.toml
 
-# Append Starship init to .zshrc if not already present
+# Append shell config to .zshrc if not already present
 if ! grep -q 'starship init zsh' ~/.zshrc 2>/dev/null; then
   cat .zshrc >> ~/.zshrc
 fi
 
-# Install Starship if not already installed (works in Codespaces/devcontainers)
+# Install Starship if not already installed
 if ! command -v starship &>/dev/null; then
   curl -sS https://starship.rs/install.sh | sh -s -- --yes
+fi
+
+# Install eza if not already installed (Linux containers only — use brew on macOS)
+if ! command -v eza &>/dev/null && [ "$(uname)" = "Linux" ]; then
+  sudo apt-get update -qq && sudo apt-get install -y -qq eza 2>/dev/null || true
+fi
+
+# Install zsh plugins (Linux containers only — use brew on macOS)
+if [ "$(uname)" = "Linux" ]; then
+  sudo apt-get install -y -qq zsh-autosuggestions zsh-syntax-highlighting 2>/dev/null || true
 fi
 
 echo "Dotfiles installed."

@@ -6,19 +6,26 @@ Personal configuration for shell, prompt, and dev tools. Works across macOS, Git
 
 | File | Purpose |
 |---|---|
-| `.zshrc` | Initializes the Starship prompt |
-| `starship.toml` | Starship prompt configuration (git, node, python modules) |
+| `.zshrc` | Shell config: eza aliases, zsh plugins, Starship init |
+| `starship.toml` | Starship prompt (git, node, python, docker, command duration, time) |
 | `.claude/settings.json` | Claude Code global settings |
-| `install.sh` | Copies configs into place and installs Starship if needed |
+| `install.sh` | Copies configs into place and installs tools if needed |
+
+### Tools configured
+
+- **[Starship](https://starship.rs/)** — cross-shell prompt with git status, language versions, command duration, and timestamps
+- **[eza](https://eza.rocks/)** — modern `ls` replacement with color-coded file types, icons, and git status
+- **[zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)** — ghost-text suggestions from command history
+- **[zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)** — colors commands as you type (green = valid, red = not found)
 
 ## Setup
 
 ### macOS (first time)
 
-1. Install Starship:
+1. Install tools via Homebrew:
 
    ```sh
-   brew install starship
+   brew install starship eza zsh-autosuggestions zsh-syntax-highlighting
    ```
 
 2. Clone this repo and run the install script:
