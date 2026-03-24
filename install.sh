@@ -9,9 +9,10 @@ cp .claude/settings.json ~/.claude/settings.json
 mkdir -p ~/.config
 cp starship.toml ~/.config/starship.toml
 
-# Append shell config to .zshrc if not already present
-if ! grep -q 'starship init zsh' ~/.zshrc 2>/dev/null; then
-  cat .zshrc >> ~/.zshrc
+# Shell config: copy managed file and source it from .zshrc
+cp .zshrc.dotfiles ~/.zshrc.dotfiles
+if ! grep -q 'source ~/.zshrc.dotfiles' ~/.zshrc 2>/dev/null; then
+  echo 'source ~/.zshrc.dotfiles' >> ~/.zshrc
 fi
 
 # Install Starship if not already installed

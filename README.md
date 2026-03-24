@@ -6,7 +6,7 @@ Personal configuration for shell, prompt, and dev tools. Works across macOS, Git
 
 | File | Purpose |
 |---|---|
-| `.zshrc` | Shell config: eza aliases, zsh plugins, Starship init |
+| `.zshrc.dotfiles` | Shell config: eza aliases, zsh plugins, Starship init (sourced from `~/.zshrc`) |
 | `starship.toml` | Starship prompt (git, node, python, docker, command duration, time) |
 | `.claude/settings.json` | Claude Code global settings |
 | `install.sh` | Copies configs into place and installs tools if needed |
