@@ -11,7 +11,8 @@ Personal configuration for shell, prompt, and dev tools. Works across macOS, Git
 | `.zshrc.dotfiles` | Zsh config: zsh plugins, Starship init (sourced from `~/.zshrc`) |
 | `.bashrc.dotfiles` | Bash config: ble.sh, Starship init (sourced from `~/.bashrc`) |
 | `starship.toml` | Starship prompt (git, node, python, docker, command duration, time) |
-| `.claude/settings.json` | Claude Code global settings |
+| `.claude/settings.json` | Claude Code global settings (hooks, permissions) |
+| `claude/scripts/approve-compound-bash.sh` | Auto-approves compound Bash commands in Claude Code ([source](https://github.com/oryband/claude-code-auto-approve)) |
 | `install.sh` | Copies configs into place and installs tools if needed |
 
 ### Tools configured
@@ -23,6 +24,7 @@ Personal configuration for shell, prompt, and dev tools. Works across macOS, Git
 - **[ble.sh](https://github.com/akinomyoga/ble.sh)** — autosuggestions and syntax highlighting for bash (bash equivalent of both zsh plugins above)
 - **[fnm](https://github.com/Schniz/fnm)** — fast Node.js version manager (macOS only — containers use their own Node)
 - **[Claude Code](https://claude.com/claude-code)** — Anthropic's CLI for Claude (macOS only — containers install it separately)
+- **[claude-code-auto-approve](https://github.com/oryband/claude-code-auto-approve)** — PreToolUse hook that auto-approves compound Bash commands (e.g. `ls | grep foo`) when every sub-command is in your allow list. Deny list blocks catastrophic operations like `git push --force`, `rm -rf /`, and `gh repo delete`
 
 ## Setup
 

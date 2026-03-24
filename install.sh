@@ -8,9 +8,11 @@ if [ "$(uname)" = "Darwin" ] && ! command -v brew &>/dev/null; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# Claude Code global settings
-mkdir -p ~/.claude
+# Claude Code global settings and hooks
+mkdir -p ~/.claude/scripts
 cp .claude/settings.json ~/.claude/settings.json
+cp claude/scripts/approve-compound-bash.sh ~/.claude/scripts/approve-compound-bash.sh
+chmod +x ~/.claude/scripts/approve-compound-bash.sh
 
 # Starship prompt config
 mkdir -p ~/.config
@@ -48,13 +50,17 @@ fi
 # Install eza and zsh plugins
 if [ "$(uname)" = "Darwin" ]; then
   # macOS — install via Homebrew
-  brew install eza zsh-autosuggestions zsh-syntax-highlighting 2>/dev/null || true
+  brew install eza zsh-autosuggestions zsh-syntax-highlighting shfmt jq 2>/dev/null || true
 else
   # Linux containers — install via apt
   if ! command -v eza &>/dev/null; then
     sudo apt-get update -qq && sudo apt-get install -y -qq eza 2>/dev/null || true
   fi
-  sudo apt-get install -y -qq zsh-autosuggestions zsh-syntax-highlighting 2>/dev/null || true
+  sudo apt-get install -y -qq zsh-autosuggestions zsh-syntax-highlighting jq 2>/dev/null || true
+  # Install shfmt (required by claude-code-auto-approve hook)
+  if ! command -v shfmt &>/dev/null; then
+    curl -sS https://webinstall.dev/shfmt | bash 2>/dev/null || true
+  fi
 fi
 
 # Install ble.sh for bash autosuggestions and syntax highlighting

@@ -2,5 +2,75 @@
   "statusLine": {
     "type": "command",
     "command": ".claude/statusline-command.sh"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/approve-compound-bash.sh",
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(ls *)", "Bash(ll *)", "Bash(tree *)", "Bash(find *)", "Bash(stat *)",
+      "Bash(file *)", "Bash(du *)", "Bash(df *)", "Bash(wc *)", "Bash(realpath *)",
+      "Bash(dirname *)", "Bash(basename *)", "Bash(pwd *)",
+      "Bash(cat *)", "Bash(head *)", "Bash(tail *)", "Bash(less *)", "Bash(bat *)",
+      "Bash(grep *)", "Bash(rg *)", "Bash(ag *)", "Bash(awk *)", "Bash(sed *)",
+      "Bash(sort *)", "Bash(uniq *)", "Bash(cut *)", "Bash(tr *)", "Bash(tee *)",
+      "Bash(diff *)", "Bash(comm *)", "Bash(paste *)", "Bash(column *)",
+      "Bash(jq *)", "Bash(yq *)", "Bash(xargs *)",
+      "Bash(mkdir *)", "Bash(cp *)", "Bash(mv *)", "Bash(touch *)", "Bash(ln *)",
+      "Bash(rm *)", "Bash(chmod *)", "Bash(chown *)",
+      "Bash(tar *)", "Bash(zip *)", "Bash(unzip *)", "Bash(gzip *)", "Bash(gunzip *)",
+      "Bash(git *)", "Bash(gh *)",
+      "Bash(node *)", "Bash(npm *)", "Bash(npx *)", "Bash(yarn *)", "Bash(pnpm *)",
+      "Bash(bun *)", "Bash(nvm *)", "Bash(fnm *)", "Bash(tsc *)", "Bash(tsx *)",
+      "Bash(eslint *)", "Bash(prettier *)", "Bash(jest *)", "Bash(vitest *)",
+      "Bash(python *)", "Bash(python3 *)", "Bash(pip *)", "Bash(pip3 *)",
+      "Bash(uv *)", "Bash(poetry *)", "Bash(pytest *)", "Bash(mypy *)",
+      "Bash(ruff *)", "Bash(black *)",
+      "Bash(go *)", "Bash(cargo *)", "Bash(rustc *)", "Bash(rustup *)",
+      "Bash(make *)", "Bash(cmake *)",
+      "Bash(docker *)", "Bash(docker-compose *)",
+      "Bash(kubectl *)", "Bash(helm *)",
+      "Bash(terraform *)", "Bash(aws *)", "Bash(gcloud *)", "Bash(az *)",
+      "Bash(curl *)", "Bash(wget *)", "Bash(ssh *)", "Bash(scp *)", "Bash(rsync *)",
+      "Bash(brew *)", "Bash(apt-get *)", "Bash(apt *)",
+      "Bash(sudo apt-get *)", "Bash(sudo apt *)",
+      "Bash(echo *)", "Bash(printf *)", "Bash(env *)", "Bash(export *)",
+      "Bash(which *)", "Bash(command *)", "Bash(type *)", "Bash(test *)",
+      "Bash(true *)", "Bash(false *)", "Bash(date *)", "Bash(sleep *)",
+      "Bash(uname *)", "Bash(whoami *)", "Bash(id *)", "Bash(hostname *)",
+      "Bash(ps *)", "Bash(kill *)", "Bash(lsof *)", "Bash(open *)", "Bash(code *)",
+      "Bash(eval *)", "Bash(source *)", "Bash(set *)", "Bash(read *)",
+      "Bash(cd *)", "Bash(pushd *)", "Bash(popd *)",
+      "Bash(claude *)", "Bash(starship *)", "Bash(eza *)"
+    ],
+    "deny": [
+      "Bash(rm -rf / *)", "Bash(rm -rf /*)",
+      "Bash(rm -rf ~ *)", "Bash(rm -rf ~/*)",
+      "Bash(rm -rf $HOME *)", "Bash(rm -rf $HOME/*)",
+      "Bash(git push --force *)", "Bash(git push -f *)",
+      "Bash(git push origin --force *)", "Bash(git push origin -f *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean -fdx *)", "Bash(git clean -dxf *)",
+      "Bash(gh repo delete *)",
+      "Bash(gh api -X DELETE *)", "Bash(gh api --method DELETE *)",
+      "Bash(chmod -R 777 / *)", "Bash(chmod -R 777 /*)",
+      "Bash(mkfs *)", "Bash(dd *)",
+      "Bash(shutdown *)", "Bash(reboot *)", "Bash(halt *)",
+      "Bash(npm publish *)", "Bash(yarn publish *)", "Bash(pnpm publish *)",
+      "Bash(kubectl delete namespace *)", "Bash(kubectl delete ns *)",
+      "Bash(terraform destroy *)",
+      "Bash(docker system prune *)"
+    ]
   }
 }
