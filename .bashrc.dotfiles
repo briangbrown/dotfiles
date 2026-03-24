@@ -1,0 +1,16 @@
+# ble.sh — autosuggestions and syntax highlighting for bash
+# Must be sourced early with --noattach, then attached at the end
+if [ -f ~/.local/share/blesh/ble.sh ]; then
+  source ~/.local/share/blesh/ble.sh --noattach
+fi
+
+# Shared aliases
+if [ -f ~/.aliases ]; then
+  source ~/.aliases
+fi
+
+# Starship prompt
+eval "$(starship init bash)"
+
+# Attach ble.sh (keep last, after all other shell config)
+[[ ${BLE_VERSION-} ]] && ble-attach

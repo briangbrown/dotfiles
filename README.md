@@ -1,12 +1,14 @@
 # dotfiles
 
-Personal configuration for shell, prompt, and dev tools. Works across macOS, GitHub Codespaces, and local devcontainers.
+Personal configuration for shell, prompt, and dev tools. Works across macOS, GitHub Codespaces, and local devcontainers. Supports both **zsh** and **bash**.
 
 ## What's included
 
 | File | Purpose |
 |---|---|
-| `.zshrc.dotfiles` | Shell config: eza aliases, zsh plugins, Starship init (sourced from `~/.zshrc`) |
+| `.aliases.dotfiles` | Managed aliases (eza) — sourced from `~/.aliases` via `install.sh` |
+| `.zshrc.dotfiles` | Zsh config: zsh plugins, Starship init (sourced from `~/.zshrc`) |
+| `.bashrc.dotfiles` | Bash config: ble.sh, Starship init (sourced from `~/.bashrc`) |
 | `starship.toml` | Starship prompt (git, node, python, docker, command duration, time) |
 | `.claude/settings.json` | Claude Code global settings |
 | `install.sh` | Copies configs into place and installs tools if needed |
@@ -15,8 +17,9 @@ Personal configuration for shell, prompt, and dev tools. Works across macOS, Git
 
 - **[Starship](https://starship.rs/)** — cross-shell prompt with git status, language versions, command duration, and timestamps
 - **[eza](https://eza.rocks/)** — modern `ls` replacement with color-coded file types, icons, and git status
-- **[zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)** — ghost-text suggestions from command history
-- **[zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)** — colors commands as you type (green = valid, red = not found)
+- **[zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)** — ghost-text suggestions from command history (zsh)
+- **[zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)** — colors commands as you type (zsh)
+- **[ble.sh](https://github.com/akinomyoga/ble.sh)** — autosuggestions and syntax highlighting for bash (bash equivalent of both zsh plugins above)
 
 ## Setup
 
@@ -45,7 +48,7 @@ Personal configuration for shell, prompt, and dev tools. Works across macOS, Git
    ./install.sh
    ```
 
-4. Restart your terminal (or `source ~/.zshrc`).
+4. Restart your terminal (or `source ~/.zshrc` / `source ~/.bashrc`).
 
 ### GitHub Codespaces
 
@@ -57,7 +60,7 @@ To enable this (one-time):
 2. Under **Dotfiles**, select `briangbrown/dotfiles`
 3. Check **Automatically install dotfiles**
 
-Every new codespace will run `install.sh`, which installs Starship and copies all configs.
+Every new codespace will run `install.sh`, which installs Starship, ble.sh, and copies all configs.
 
 ### Local devcontainers
 
@@ -85,7 +88,7 @@ Pull the latest changes and re-run the install script:
 cd ~/dotfiles
 git pull
 ./install.sh
-source ~/.zshrc
+source ~/.zshrc  # or source ~/.bashrc
 ```
 
 ### Codespaces
