@@ -2,3 +2,9 @@
 
 # Consistent 256-color support across all terminals
 export TERM=xterm-256color
+
+# fnm (Fast Node Manager) — macOS only, skipped in containers where Node
+# is provided by the devcontainer image
+if command -v fnm &>/dev/null; then
+  eval "$(fnm env --use-on-cd)"
+fi

@@ -6,7 +6,7 @@ Personal configuration for shell, prompt, and dev tools. Works across macOS, Git
 
 | File | Purpose |
 |---|---|
-| `.exports.dotfiles` | Shared environment variables (TERM) — sourced from `~/.exports` via `install.sh` |
+| `.exports.dotfiles` | Shared environment variables (TERM, fnm) — sourced from `~/.exports` via `install.sh` |
 | `.aliases.dotfiles` | Managed aliases (eza) — sourced from `~/.aliases` via `install.sh` |
 | `.zshrc.dotfiles` | Zsh config: zsh plugins, Starship init (sourced from `~/.zshrc`) |
 | `.bashrc.dotfiles` | Bash config: ble.sh, Starship init (sourced from `~/.bashrc`) |
@@ -21,18 +21,30 @@ Personal configuration for shell, prompt, and dev tools. Works across macOS, Git
 - **[zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)** — ghost-text suggestions from command history (zsh)
 - **[zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)** — colors commands as you type (zsh)
 - **[ble.sh](https://github.com/akinomyoga/ble.sh)** — autosuggestions and syntax highlighting for bash (bash equivalent of both zsh plugins above)
+- **[fnm](https://github.com/Schniz/fnm)** — fast Node.js version manager (macOS only — containers use their own Node)
+- **[Claude Code](https://claude.com/claude-code)** — Anthropic's CLI for Claude (macOS only — containers install it separately)
 
 ## Setup
 
 ### macOS (first time)
 
-1. Install tools and Nerd Font via Homebrew:
+1. Clone this repo and run the install script:
 
    ```sh
-   brew install starship eza zsh-autosuggestions zsh-syntax-highlighting font-jetbrains-mono-nerd-font
+   git clone https://github.com/briangbrown/dotfiles.git ~/dotfiles
+   cd ~/dotfiles
+   ./install.sh
    ```
 
-2. Set the Nerd Font in your VS Code user settings (for terminal icons):
+   The install script handles everything: Homebrew (if not installed), Starship, eza, zsh plugins, fnm, Node.js LTS, and Claude Code.
+
+2. Install the Nerd Font (for terminal icons):
+
+   ```sh
+   brew install font-jetbrains-mono-nerd-font
+   ```
+
+3. Set the Nerd Font in your VS Code user settings:
 
    ```json
    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrains Mono', monospace",
@@ -40,14 +52,6 @@ Personal configuration for shell, prompt, and dev tools. Works across macOS, Git
    ```
 
    For iTerm2 or other local terminals, set the font to "JetBrainsMono Nerd Font" in the terminal's preferences.
-
-3. Clone this repo and run the install script:
-
-   ```sh
-   git clone https://github.com/briangbrown/dotfiles.git ~/dotfiles
-   cd ~/dotfiles
-   ./install.sh
-   ```
 
 4. Restart your terminal (or `source ~/.zshrc` / `source ~/.bashrc`).
 

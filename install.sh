@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e
 
+# Install Homebrew on macOS if not already installed (required for all
+# macOS tool installs below)
+if [ "$(uname)" = "Darwin" ] && ! command -v brew &>/dev/null; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # Claude Code global settings
 mkdir -p ~/.claude
 cp .claude/settings.json ~/.claude/settings.json
@@ -38,13 +45,15 @@ if ! command -v starship &>/dev/null; then
   curl -sS https://starship.rs/install.sh | sh -s -- --yes
 fi
 
-# Install eza if not already installed (Linux containers only — use brew on macOS)
-if ! command -v eza &>/dev/null && [ "$(uname)" = "Linux" ]; then
-  sudo apt-get update -qq && sudo apt-get install -y -qq eza 2>/dev/null || true
-fi
-
-# Install zsh plugins (Linux containers only — use brew on macOS)
-if [ "$(uname)" = "Linux" ]; then
+# Install eza and zsh plugins
+if [ "$(uname)" = "Darwin" ]; then
+  # macOS — install via Homebrew
+  brew install eza zsh-autosuggestions zsh-syntax-highlighting 2>/dev/null || true
+else
+  # Linux containers — install via apt
+  if ! command -v eza &>/dev/null; then
+    sudo apt-get update -qq && sudo apt-get install -y -qq eza 2>/dev/null || true
+  fi
   sudo apt-get install -y -qq zsh-autosuggestions zsh-syntax-highlighting 2>/dev/null || true
 fi
 
@@ -63,6 +72,29 @@ if [ ! -d ~/.local/share/blesh ]; then
     curl -sL https://github.com/akinomyoga/ble.sh/releases/download/nightly/ble-nightly.tar.xz | tar xJf - -C "$tmpdir"
     bash "$tmpdir"/ble-nightly/ble.sh --install ~/.local/share/blesh
     rm -rf "$tmpdir"
+  fi
+fi
+
+# --- macOS-only tools ---
+# These are skipped in containers where Node and Claude Code are managed
+# by the devcontainer image / feature configuration.
+if [ "$(uname)" = "Darwin" ]; then
+  # fnm (Fast Node Manager) — manages Node.js versions on macOS
+  if ! command -v fnm &>/dev/null; then
+    brew install fnm
+  fi
+
+  # Activate fnm and install LTS Node if no version is installed yet.
+  # This must happen before Claude Code install so npm is on the PATH.
+  eval "$(fnm env)"
+  if ! fnm list | grep -q "v"; then
+    fnm install --lts
+  fi
+
+  # Claude Code CLI — installed globally on macOS so it's available in
+  # any local VS Code terminal (containers install it separately)
+  if ! command -v claude &>/dev/null; then
+    npm install -g @anthropic-ai/claude-code
   fi
 fi
 
