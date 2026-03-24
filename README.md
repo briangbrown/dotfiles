@@ -6,6 +6,7 @@ Personal configuration for shell, prompt, and dev tools. Works across macOS, Git
 
 | File | Purpose |
 |---|---|
+| `.exports.dotfiles` | Shared environment variables (TERM) — sourced from `~/.exports` via `install.sh` |
 | `.aliases.dotfiles` | Managed aliases (eza) — sourced from `~/.aliases` via `install.sh` |
 | `.zshrc.dotfiles` | Zsh config: zsh plugins, Starship init (sourced from `~/.zshrc`) |
 | `.bashrc.dotfiles` | Bash config: ble.sh, Starship init (sourced from `~/.bashrc`) |
