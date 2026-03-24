@@ -9,6 +9,12 @@ cp .claude/settings.json ~/.claude/settings.json
 mkdir -p ~/.config
 cp starship.toml ~/.config/starship.toml
 
+# Shared exports: copy managed file and source it from .exports
+cp .exports.dotfiles ~/.exports.dotfiles
+if ! grep -q 'source ~/.exports.dotfiles' ~/.exports 2>/dev/null; then
+  echo 'source ~/.exports.dotfiles' >> ~/.exports
+fi
+
 # Shared aliases: copy managed file and source it from .aliases
 cp .aliases.dotfiles ~/.aliases.dotfiles
 if ! grep -q 'source ~/.aliases.dotfiles' ~/.aliases 2>/dev/null; then

@@ -1,3 +1,8 @@
+# Shared exports
+if [ -f ~/.exports ]; then
+  source ~/.exports
+fi
+
 # Shared aliases
 if [ -f ~/.aliases ]; then
   source ~/.aliases

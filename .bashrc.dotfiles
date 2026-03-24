@@ -4,6 +4,11 @@ if [ -f ~/.local/share/blesh/ble.sh ]; then
   source ~/.local/share/blesh/ble.sh --noattach
 fi
 
+# Shared exports
+if [ -f ~/.exports ]; then
+  source ~/.exports
+fi
+
 # Shared aliases
 if [ -f ~/.aliases ]; then
   source ~/.aliases
