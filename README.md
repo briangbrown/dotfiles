@@ -22,13 +22,22 @@ Personal configuration for shell, prompt, and dev tools. Works across macOS, Git
 
 ### macOS (first time)
 
-1. Install tools via Homebrew:
+1. Install tools and Nerd Font via Homebrew:
 
    ```sh
-   brew install starship eza zsh-autosuggestions zsh-syntax-highlighting
+   brew install starship eza zsh-autosuggestions zsh-syntax-highlighting font-jetbrains-mono-nerd-font
    ```
 
-2. Clone this repo and run the install script:
+2. Set the Nerd Font in your VS Code user settings (for terminal icons):
+
+   ```json
+   "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrains Mono', monospace",
+   "editor.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrains Mono', monospace"
+   ```
+
+   For iTerm2 or other local terminals, set the font to "JetBrainsMono Nerd Font" in the terminal's preferences.
+
+3. Clone this repo and run the install script:
 
    ```sh
    git clone https://github.com/briangbrown/dotfiles.git ~/dotfiles
@@ -36,7 +45,7 @@ Personal configuration for shell, prompt, and dev tools. Works across macOS, Git
    ./install.sh
    ```
 
-3. Restart your terminal (or `source ~/.zshrc`).
+4. Restart your terminal (or `source ~/.zshrc`).
 
 ### GitHub Codespaces
 
