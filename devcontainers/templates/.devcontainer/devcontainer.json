@@ -7,10 +7,7 @@
   "containerEnv": {
     "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
   },
-  "mounts": [
-    "source=${localEnv:HOME}/.claude/settings.json,target=/home/node/.claude/settings.json,type=bind,consistency=consistent"
-  ],
-  "customizations": {
+"customizations": {
     "vscode": {
       "extensions": [
         "anthropic.claude-code"

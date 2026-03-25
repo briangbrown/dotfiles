@@ -9,11 +9,6 @@ if [ "$(uname)" = "Darwin" ] && ! command -v brew &>/dev/null; then
 fi
 
 # Claude Code global settings and hooks
-# In containers, ~/.claude may be a root-owned bind mount; fix ownership
-# so we can create subdirectories
-if [ -d ~/.claude ] && [ ! -w ~/.claude ] && command -v sudo &>/dev/null; then
-  sudo chown "$(id -u):$(id -g)" ~/.claude
-fi
 mkdir -p ~/.claude/scripts
 cp .claude/settings.json ~/.claude/settings.json
 cp claude/scripts/approve-compound-bash.sh ~/.claude/scripts/approve-compound-bash.sh
