@@ -8,3 +8,9 @@ if command -v eza &>/dev/null; then
   alias la="eza -a --color=always --icons"
   alias lt="eza --tree --level=2 --icons"
 fi
+
+# Devcontainer workspace management (macOS only)
+if [[ "$(uname)" == "Darwin" ]]; then
+  alias iw="$HOME/Development/.devcontainers/init-workspace.sh"
+  alias tw="$HOME/Development/.devcontainers/teardown-workspace.sh"
+fi

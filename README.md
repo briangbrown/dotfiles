@@ -13,6 +13,7 @@ Personal configuration for shell, prompt, and dev tools. Works across macOS, Git
 | `starship.toml` | Starship prompt (git, node, python, docker, command duration, time) |
 | `.claude/settings.json` | Claude Code global settings (hooks, permissions) |
 | `claude/scripts/approve-compound-bash.sh` | Auto-approves compound Bash commands in Claude Code ([source](https://github.com/oryband/claude-code-auto-approve)) |
+| `devcontainers/` | Workspace bootstrapping: init/teardown scripts and fallback devcontainer template (macOS only) |
 | `install.sh` | Copies configs into place and installs tools if needed |
 
 ### Tools configured
