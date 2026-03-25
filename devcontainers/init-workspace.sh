@@ -50,41 +50,6 @@ else
     echo ".devcontainer/" >> .git/info/exclude
 fi
 
-# 5. Default windows to open in vscode
-# Ensure the directory exists first!
-mkdir -p .vscode
-
-# ---------------------------------------------------------
-# Auto-Terminal Setup (Self-Destructing on First Run)
-# ---------------------------------------------------------
-# Only create this if the repository doesn't already have its own tracked tasks.json
-if [[ ! -f ".vscode/tasks.json" ]]; then
-  cat << 'EOF' > .vscode/tasks.json
-{
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Boot: Claude Code",
-      "type": "shell",
-      "command": "rm -f .vscode/tasks.json && claude; exec bash",
-      "presentation": { "reveal": "always", "panel": "new", "focus": true },
-      "runOptions": { "runOn": "folderOpen" }
-    },
-    {
-      "label": "Boot: Blank Terminal",
-      "type": "shell",
-      "command": "bash",
-      "presentation": { "reveal": "always", "panel": "new", "focus": false },
-      "runOptions": { "runOn": "folderOpen" }
-    }
-  ]
-}
-EOF
-  # Hide it from Git so it doesn't show up as a dirty file before it deletes itself
-  echo ".vscode/tasks.json" >> .git/info/exclude
-fi
-# ---------------------------------------------------------
-
 echo "✅ Workspace prepared."
 echo "   To launch, run: code ."
 echo "   When VS Code opens, accept the prompt to 'Reopen in Container'."
