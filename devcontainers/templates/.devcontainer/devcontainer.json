@@ -4,6 +4,9 @@
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
+  // Disable IPv6 so Claude Code's OAuth callback binds to IPv4,
+  // which VS Code's port forwarding can actually reach.
+  // See: https://github.com/anthropics/claude-code/issues/9376
   "runArgs": ["--sysctl", "net.ipv6.conf.all.disable_ipv6=1"],
   "containerEnv": {
     "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
@@ -15,6 +18,7 @@
       ]
     }
   },
-  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && [ -f package.json ] && npm install; git fetch",
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && git fetch",
+  // The default image runs as "node" (non-root)
   "remoteUser": "node"
 }
