@@ -45,6 +45,8 @@ else
     echo "📦 Applying default local fallback configuration..."
     # Copy the local templates into the cloned repo root
     cp -r "$TEMPLATES_DIR/.devcontainer" "$TARGET_DIR/"
+    # Hide from git so the workspace stays clean
+    echo ".devcontainer/" >> .git/info/exclude
 fi
 
 # 5. Default windows to open in vscode
