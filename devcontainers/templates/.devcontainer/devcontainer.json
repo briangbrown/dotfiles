@@ -17,6 +17,6 @@
       ]
     }
   },
-  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && npm install && git fetch",
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && [ -f package.json ] && npm install; git fetch",
   "remoteUser": "node"
 }
