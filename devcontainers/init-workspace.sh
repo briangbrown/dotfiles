@@ -25,6 +25,7 @@ TARGET_DIR="$DEVELOPMENT_HUB/$WORKSPACE_NAME"
 # 2. Prevent Overwriting
 if [[ -d "$TARGET_DIR" ]]; then
     echo "Error: Directory '$TARGET_DIR' already exists."
+    echo "To tear it down first, run: tw $WORKSPACE_NAME"
     exit 1
 fi
 
