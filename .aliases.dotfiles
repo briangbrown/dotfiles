@@ -15,5 +15,5 @@ if [[ "$(uname)" == "Darwin" ]]; then
   alias iw="$HOME/Development/.devcontainers/init-workspace.sh"
   alias tw="$HOME/Development/.devcontainers/teardown-workspace.sh"
   # Pull latest dotfiles and re-run install
-  alias dotup='cd ~/dotfiles && git pull && ./install.sh && source ~/."${SHELL##*/}"rc'
+  alias dotup='pushd ~/dotfiles > /dev/null && git pull && ./install.sh && source ~/."${SHELL##*/}"rc && popd > /dev/null'
 fi
