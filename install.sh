@@ -97,6 +97,11 @@ if [ "$(uname)" = "Darwin" ]; then
     fnm install --lts
   fi
 
+  # Devcontainer workspace management scripts
+  mkdir -p ~/Development/.devcontainers
+  cp -r devcontainers/. ~/Development/.devcontainers/
+  chmod +x ~/Development/.devcontainers/*.sh
+
   # Claude Code CLI — installed globally on macOS so it's available in
   # any local VS Code terminal (containers install it separately)
   if ! command -v claude &>/dev/null; then
