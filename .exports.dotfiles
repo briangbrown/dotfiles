@@ -4,52 +4,13 @@
 export TERM=xterm-256color
 
 # --- Theme detection (light/dark) ---
-# Priority: manual override > VS Code env > terminal background query > macOS > default
-#
-# __detect_terminal_bg queries the terminal's background color via OSC 11.
-# Works in VS Code (including devcontainers), iTerm2, and most modern terminals.
-# Returns "light" or "dark" based on perceived luminance, or empty on failure.
-__detect_terminal_bg() {
-  # Only works in interactive shells with a real terminal
-  [ -t 0 ] && [ -t 1 ] || return 1
-  local response="" old_stty
-  old_stty=$(stty -g 2>/dev/null) || return 1
-  # Request background color; timeout after 0.1s
-  stty raw -echo min 0 time 1 2>/dev/null
-  printf '\e]11;?\a' >/dev/tty
-  read -r response </dev/tty 2>/dev/null
-  stty "$old_stty" 2>/dev/null
-  # Parse rgb:RRRR/GGGG/BBBB from response
-  local r g b hex_r hex_g hex_b
-  if [[ "$response" =~ rgb:([0-9a-fA-F]+)/([0-9a-fA-F]+)/([0-9a-fA-F]+) ]]; then
-    # zsh uses $match, bash uses $BASH_REMATCH
-    if [ -n "$ZSH_VERSION" ]; then
-      hex_r="${match[1]}" hex_g="${match[2]}" hex_b="${match[3]}"
-    else
-      hex_r="${BASH_REMATCH[1]}" hex_g="${BASH_REMATCH[2]}" hex_b="${BASH_REMATCH[3]}"
-    fi
-    # Normalize to 8-bit by taking first 2 hex digits
-    r=$(( 16#${hex_r:0:2} ))
-    g=$(( 16#${hex_g:0:2} ))
-    b=$(( 16#${hex_b:0:2} ))
-    # Perceived luminance (ITU-R BT.601)
-    local lum=$(( (r * 299 + g * 587 + b * 114) / 1000 ))
-    if [ "$lum" -gt 128 ]; then
-      echo "light"
-    else
-      echo "dark"
-    fi
-  fi
-}
-
+# Priority: manual override > VS Code env > macOS system preference > default
+# Use `theme light` or `theme dark` to switch mid-session.
 if [ -z "$DOTFILES_THEME" ]; then
   if [ "$VSCODE_THEME_KIND" = "vscode-light" ] || [ "$VSCODE_THEME_KIND" = "vscode-high-contrast-light" ]; then
     export DOTFILES_THEME="light"
   elif [ "$VSCODE_THEME_KIND" = "vscode-dark" ] || [ "$VSCODE_THEME_KIND" = "vscode-high-contrast" ]; then
     export DOTFILES_THEME="dark"
-  elif _detected=$(__detect_terminal_bg 2>/dev/null) && [ -n "$_detected" ]; then
-    export DOTFILES_THEME="$_detected"
-    unset _detected
   elif [ "$(uname)" = "Darwin" ] && ! defaults read -g AppleInterfaceStyle &>/dev/null 2>&1; then
     export DOTFILES_THEME="light"
   else

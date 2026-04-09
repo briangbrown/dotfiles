@@ -9,7 +9,8 @@
   // See: https://github.com/anthropics/claude-code/issues/9376
   "runArgs": ["--sysctl", "net.ipv6.conf.all.disable_ipv6=1"],
   "containerEnv": {
-    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
+    "VSCODE_THEME_KIND": "${localEnv:VSCODE_THEME_KIND}"
   },
   "customizations": {
     "vscode": {
