@@ -9,6 +9,19 @@ if command -v eza &>/dev/null; then
   alias lt="eza --tree --level=2 --icons"
 fi
 
+# Switch theme mid-session: `theme light` or `theme dark`
+theme() {
+  if [ -z "$1" ] || { [ "$1" != "light" ] && [ "$1" != "dark" ]; }; then
+    echo "Current: $DOTFILES_THEME"
+    echo "Usage: theme [light|dark]"
+    return
+  fi
+  export DOTFILES_THEME="$1"
+  # Re-source exports to update tool env vars
+  [ -f ~/.exports ] && source ~/.exports
+  echo "Switched to $1 theme (new shells will inherit this)"
+}
+
 # macOS only
 if [[ "$(uname)" == "Darwin" ]]; then
   # Devcontainer workspace management

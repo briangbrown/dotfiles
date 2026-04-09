@@ -3,6 +3,27 @@
 # Consistent 256-color support across all terminals
 export TERM=xterm-256color
 
+# --- Theme detection (light/dark) ---
+# Priority: manual override > VS Code > macOS system preference > default
+if [ -z "$DOTFILES_THEME" ]; then
+  if [ "$VSCODE_THEME_KIND" = "vscode-light" ] || [ "$VSCODE_THEME_KIND" = "vscode-high-contrast-light" ]; then
+    export DOTFILES_THEME="light"
+  elif [ "$(uname)" = "Darwin" ] && ! defaults read -g AppleInterfaceStyle &>/dev/null 2>&1; then
+    export DOTFILES_THEME="light"
+  else
+    export DOTFILES_THEME="dark"
+  fi
+fi
+
+# Theme-aware tool defaults
+if [ "$DOTFILES_THEME" = "light" ]; then
+  export BAT_THEME="GitHub"
+  export FZF_DEFAULT_OPTS="--color=light"
+else
+  export BAT_THEME="Dracula"
+  export FZF_DEFAULT_OPTS="--color=dark"
+fi
+
 # fnm (Fast Node Manager) — macOS only, skipped in containers where Node
 # is provided by the devcontainer image
 if command -v fnm &>/dev/null; then
